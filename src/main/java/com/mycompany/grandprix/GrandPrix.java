@@ -12,6 +12,6 @@ package com.mycompany.grandprix;
 public class GrandPrix {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Benvenuti al Granprix!");
     }
 }
