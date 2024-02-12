@@ -12,6 +12,8 @@ package com.mycompany.grandprix;
 public class GrandPrix {
 
     public static void main(String[] args) {
-        System.out.println("Benvenuti al Granprix!");
+        Giocatore giocatore1 = new Giocatore("esty", "nope", "verme");
+        giocatore1.criptaVigenere();
+        giocatore1.salvaDatiCifrati();
     }
 }
