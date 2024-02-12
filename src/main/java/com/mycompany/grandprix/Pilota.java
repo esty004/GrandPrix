@@ -11,16 +11,10 @@ package com.mycompany.grandprix;
 public class Pilota extends Thread{
     String nome;
     String modelloAuto;
-    String nomeCircuito;
-    int ngiri;
-    int lunghezzaCircuito;
-    
-    public Pilota(String nome, String modelloAuto, String nomeCircuito, int ngiri, int lunghezzaCircuito){
+
+    public Pilota(String nome, String modelloAuto){
         this.nome = nome;
         this.modelloAuto = modelloAuto;
-        this.nomeCircuito = nomeCircuito;
-        this.ngiri = ngiri;
-        this.lunghezzaCircuito = lunghezzaCircuito;
     }
     @Override
     public void run(){

@@ -15,5 +15,6 @@ public class GrandPrix {
         Giocatore giocatore1 = new Giocatore("esty", "nope", "verme");
         giocatore1.criptaVigenere();
         giocatore1.salvaDatiCifrati();
+        giocatore1.avviaGara();
     }
 }
