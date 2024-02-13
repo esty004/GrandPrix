@@ -55,7 +55,7 @@ public class Giocatore {
         System.out.println("Inserisci la lunghezza del circuito(in metri):");
         int lunghezza = scan.nextInt();
         Circuito circuito = new Circuito(nameCircuito, ngiri, lunghezza);
-        circuito.inserisciDatiPiloti();
+        circuito.gestionePiloti();
 
     }
 

@@ -22,7 +22,7 @@ public class Circuito {
         this.lunghezzaCircuito = lunghezzaCircuito;
     }
 
-    public void inserisciDatiPiloti() {
+    public void gestionePiloti() {
         Scanner scan = new Scanner(System.in);
         System.out.println("inserisci il numero di piloti che partecipano alla gara");
         int npiloti = scan.nextInt();
@@ -35,5 +35,10 @@ public class Circuito {
             String modelloAuto = scan.nextLine();
             piloti[i] = new Pilota(nomePilota, modelloAuto);
         }
+        for(int i = 0; i < piloti.length; i++){
+            piloti[i].start();
+        }
+        
     }
+    
 }
