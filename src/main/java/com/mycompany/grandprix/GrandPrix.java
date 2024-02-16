@@ -7,14 +7,15 @@ package com.mycompany.grandprix;
 
 /**
  *
- * @author Studenti
+ * @author esty
  */
 public class GrandPrix {
 
     public static void main(String[] args) {
-        Giocatore giocatore1 = new Giocatore("esty", "nope", "verme");
-        giocatore1.criptaVigenere();
-        giocatore1.salvaDatiCifrati();
+        Giocatore giocatore1 = new Giocatore("esty", "nope", "verme");//sto creando un istanza della classe giocatore
+        giocatore1.criptaVigenere();//serve per criptare la password usando la chiave
+        giocatore1.salvaDatiCifrati();//serve a salvare i dati cifrati su un file
         giocatore1.avviaGara();
+        
     }
 }

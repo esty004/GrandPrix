@@ -8,7 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 /**
  *
- * @author Magdalena
+ * @author esty
  */
 public class Lettore extends Thread {
 

@@ -12,8 +12,9 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Magdalena
+ * @author esty
  */
+
 public class Scrittore implements Runnable {
 
     String nomeFile;

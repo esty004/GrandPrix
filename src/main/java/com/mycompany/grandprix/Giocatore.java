@@ -4,11 +4,11 @@
  */
 package com.mycompany.grandprix;
 
-import java.util.Scanner;
+import java.util.Scanner;//libreria per abilitare lo scanner(serve per far mettere l'input all'utente)
 
 /**
  *
- * @author Magdalena
+ * @author esty
  */
 public class Giocatore {
 
@@ -22,7 +22,8 @@ public class Giocatore {
         this.password = password;
         this.chiave = chiave;
     }
-
+    
+    //cripta la password utilizzando la chiave
     public String criptaVigenere() {
         StringBuilder passwordCifrata = new StringBuilder();
 
@@ -39,7 +40,8 @@ public class Giocatore {
         this.passwordCifrata = passwordCifrata.toString();
         return this.passwordCifrata;
     }
-
+    
+    //salva l'username e la password cifrata su un file(salvataggio.csv)
     public void salvaDatiCifrati() {
         Scrittore scrittore = new Scrittore("salvataggio.csv", username, passwordCifrata);
         Thread threadScrittore = new Thread(scrittore);
@@ -49,14 +51,15 @@ public class Giocatore {
     public void avviaGara() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Inserisci nome circuito:");
-        String nameCircuito = scan.nextLine();
+        String nomeCircuito = scan.nextLine();
         System.out.println("Numero di giri della gara:");
         int ngiri = scan.nextInt();
-        System.out.println("Inserisci la lunghezza del circuito(in metri):");
+        System.out.println("Inserisci la lunghezza del circuito (in metri):");
         int lunghezza = scan.nextInt();
-        Circuito circuito = new Circuito(nameCircuito, ngiri, lunghezza);
+        System.out.println("Inserisci il numero di pit stop possibili:");
+        int numeroPitStopPossibili = scan.nextInt();
+        
+        Circuito circuito = new Circuito(nomeCircuito, ngiri, lunghezza, numeroPitStopPossibili);
         circuito.gestionePiloti();
-
     }
-
 }

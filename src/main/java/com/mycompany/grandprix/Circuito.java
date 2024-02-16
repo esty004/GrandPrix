@@ -8,37 +8,37 @@ import java.util.Scanner;
 
 /**
  *
- * @author Magdalena
+ * @author esty
  */
 public class Circuito {
 
     String nomeCircuito;
     int ngiri;
     int lunghezzaCircuito;
+    int numeroPitStopPossibili;
 
-    public Circuito(String nomeCircuito, int ngiri, int lunghezzaCircuito) {
+    public Circuito(String nomeCircuito, int ngiri, int lunghezzaCircuito, int numeroPitStopPossibili) {
         this.nomeCircuito = nomeCircuito;
         this.ngiri = ngiri;
         this.lunghezzaCircuito = lunghezzaCircuito;
+        this.numeroPitStopPossibili = numeroPitStopPossibili;
     }
 
     public void gestionePiloti() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("inserisci il numero di piloti che partecipano alla gara");
+        System.out.println("Inserisci il numero di piloti che partecipano alla gara:");
         int npiloti = scan.nextInt();
-        Pilota[] piloti = new Pilota[npiloti];
+        Pilota[] piloti = new Pilota[npiloti]; // Creazione di un array di piloti
         for (int i = 0; i < piloti.length; i++) {
             scan.nextLine();
             System.out.println("Inserisci nome del pilota:");
             String nomePilota = scan.nextLine();
             System.out.println("Inserisci modello dell'auto:");
             String modelloAuto = scan.nextLine();
-            piloti[i] = new Pilota(nomePilota, modelloAuto);
-        }
-        for(int i = 0; i < piloti.length; i++){
+            piloti[i] = new Pilota(nomePilota, modelloAuto, nomeCircuito, ngiri, lunghezzaCircuito, numeroPitStopPossibili);
+        }// Inserimento dati del pilota per il numero di piloti specificato dall'utente
+        for (int i = 0; i < piloti.length; i++) {
             piloti[i].start();
-        }
-        
+        }// Avvio di tutti i thread piloti
     }
-    
 }
