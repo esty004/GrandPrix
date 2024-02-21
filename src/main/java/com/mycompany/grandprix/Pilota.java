@@ -1,7 +1,5 @@
 package com.mycompany.grandprix;
 
-import java.util.Random;
-
 /**
  *
  * @author esty
@@ -9,6 +7,7 @@ import java.util.Random;
 import java.util.Random;
 
 public class Pilota extends Thread {
+
     String nome;
     String modelloAuto;
     String nomeCircuito;
@@ -30,12 +29,12 @@ public class Pilota extends Thread {
         Random rand = new Random();
         int giriCompletati = 0;
         int posizione = 0;
-        
+
         while (giriCompletati < ngiri) {
             // Simulazione movimento dell'auto
             int distanzaPercorsa = rand.nextInt(100); // Distanza casuale percorsa in metri
             posizione += distanzaPercorsa;
-            
+
             // Verifica se è necessario un pit stop
             if (posizione % (lunghezzaCircuito / numeroPitStopPossibili) == 0) {
                 // Esegue il pit stop
@@ -46,13 +45,13 @@ public class Pilota extends Thread {
                     e.printStackTrace();
                 }
             }
-            
+
             // Verifica se si è verificato un incidente
             if (rand.nextDouble() < 0.05) { // Probabilità del 5% di incidente
                 System.out.println("Incidente! " + nome + " è costretto ad abbandonare la gara.");
                 break;
             }
-            
+
             // Verifica se è necessario far intervenire la safety car
             if (rand.nextDouble() < 0.02) { // Probabilità del 2% di intervento della safety car
                 System.out.println("Safety car in pista!");
@@ -62,14 +61,14 @@ public class Pilota extends Thread {
                     e.printStackTrace();
                 }
             }
-            
+
             // Verifica se è stato completato un giro
             if (posizione >= lunghezzaCircuito) {
                 System.out.println(nome + " ha completato il giro " + (giriCompletati + 1) + " su " + ngiri);
                 posizione -= lunghezzaCircuito; // Resetta la posizione per il nuovo giro
                 giriCompletati++;
             }
-            
+
             // Simulazione di avanzamento del tempo (1 secondo)
             try {
                 Thread.sleep(1000);
@@ -77,7 +76,14 @@ public class Pilota extends Thread {
                 e.printStackTrace();
             }
         }
-        
+
         System.out.println(nome + " ha completato la gara.");
+        
+    }
+
+    public void salvaDatiPiloti() {
+        ScrittoreDatiPiloti scrittore = new ScrittoreDatiPiloti("salvataggioPiloti.csv", nome, modelloAuto);
+        Thread threadScrittore = new Thread(scrittore);
+        threadScrittore.start();
     }
 }

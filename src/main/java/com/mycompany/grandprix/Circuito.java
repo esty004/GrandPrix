@@ -39,6 +39,7 @@ public class Circuito {
         }// Inserimento dati del pilota per il numero di piloti specificato dall'utente
         for (int i = 0; i < piloti.length; i++) {
             piloti[i].start();
+            piloti[i].salvaDatiPiloti();
         }// Avvio di tutti i thread piloti
     }
 }

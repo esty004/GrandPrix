@@ -4,6 +4,7 @@
  */
 
 package com.mycompany.grandprix;
+import java.util.Scanner;
 
 /**
  *
@@ -12,7 +13,14 @@ package com.mycompany.grandprix;
 public class GrandPrix {
 
     public static void main(String[] args) {
-        Giocatore giocatore1 = new Giocatore("esty", "nope", "verme");//sto creando un istanza della classe giocatore
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Inserisci il nome del giocatore:");
+        String nome = scan.nextLine();
+        System.out.println("Inserisci la password:");
+        String password = scan.nextLine();
+        System.out.println("Inserisci la chiave:");
+        String chiave = scan.nextLine();
+        Giocatore giocatore1 = new Giocatore(nome, password, chiave);//sto creando un istanza della classe giocatore
         giocatore1.criptaVigenere();//serve per criptare la password usando la chiave
         giocatore1.salvaDatiCifrati();//serve a salvare i dati cifrati su un file
         giocatore1.avviaGara();
