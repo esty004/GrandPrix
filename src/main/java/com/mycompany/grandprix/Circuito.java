@@ -35,7 +35,11 @@ public class Circuito {
             String nomePilota = scan.nextLine();
             System.out.println("Inserisci modello dell'auto:");
             String modelloAuto = scan.nextLine();
-            piloti[i] = new Pilota(nomePilota, modelloAuto, nomeCircuito, ngiri, lunghezzaCircuito, numeroPitStopPossibili);
+            System.out.println("Che tipo di auto ha questo pilota?");
+            System.out.println("1. Base");
+            System.out.println("2. truccata");
+            int scelta = scan.nextInt();
+            piloti[i] = new Pilota(nomePilota, modelloAuto, nomeCircuito, ngiri, lunghezzaCircuito, numeroPitStopPossibili, scelta);
         }// Inserimento dati del pilota per il numero di piloti specificato dall'utente
         for (int i = 0; i < piloti.length; i++) {
             piloti[i].start();

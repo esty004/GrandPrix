@@ -62,4 +62,6 @@ public class Giocatore {
         Circuito circuito = new Circuito(nomeCircuito, ngiri, lunghezza, numeroPitStopPossibili);
         circuito.gestionePiloti();
     }
+    
+    
 }
