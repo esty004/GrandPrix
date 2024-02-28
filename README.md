@@ -1,36 +1,41 @@
-# Simulatore Grand Prix
+# Grand Prix
 
-Questo progetto consiste in un'applicazione Java che simula una gara di Grand Prix, dove i giocatori possono partecipare come piloti, gestendo le proprie auto attraverso un circuito e vivendo varie situazioni di gara come i pit stop, gli incidenti e gli interventi della safety car.
+Questo progetto simula una gara automobilistica in cui i piloti gareggiano su diversi circuiti.
 
 ## Funzionalità
 
-- **Registrazione Giocatori**: I giocatori possono registrarsi fornendo il loro nome, password e chiave di crittografia.
-- **Crittografia Password**: Le password dei giocatori vengono crittografate utilizzando il cifrario di Vigenère prima di essere salvate.
-- **Archiviazione Dati**: I dati crittografati dei giocatori vengono salvati su un file CSV.
-- **Gestione Circuito**: Gli utenti possono specificare il nome del circuito, il numero di giri, la lunghezza e il numero di possibili pit stop.
-- **Gestione Piloti**: I giocatori possono gestire i piloti che partecipano alla gara, fornendo i loro nomi e modelli di auto.
-- **Simulazione Gara**: L'applicazione simula la gara, includendo movimenti delle auto, pit stop, incidenti e interventi della safety car.
-- **Registrazione Dati**: I dati della gara come nomi dei piloti e modelli di auto vengono registrati su un file CSV.
+- **Criptazione Password**: Le password dei giocatori vengono criptate utilizzando l'algoritmo di Vigenère.
+- **Salvataggio Dati**: I dati dei giocatori e dei piloti vengono salvati su file CSV.
+- **Simulazione Gara**: I piloti gareggiano su circuiti predefiniti, con possibilità di incidenti e pit stop.
+- **Classifica Finale**: Alla fine della gara viene generata una classifica dei piloti.
 
-## Come Eseguire
+## Istruzioni per l'utilizzo
 
-Per compilare ed eseguire il programma, segui questi passaggi:
+1. **Esecuzione del Programma**: Per eseguire il programma, compilare ed eseguire il file `GrandPrix.java`.
+2. **Input Utente**: Seguire le istruzioni visualizzate sulla console per inserire i dati richiesti.
+3. **Visualizzazione Risultati**: Alla fine della gara, verrà visualizzata la classifica finale e salvata su file.
 
-1. Assicurati di avere installato il Java Development Kit (JDK) sul tuo sistema.
-2. Clona o scarica questo repository sul tuo computer locale.
-3. Naviga nella directory del progetto tramite la riga di comando.
-4. Compila i file Java usando il seguente comando:
+## Struttura del Codice
 
-    ```
-    javac com/mycompany/grandprix/*.java
-    ```
+Il codice è diviso in diverse classi:
 
-5. Esegui l'applicazione con il seguente comando:
+- **GrandPrix.java**: La classe principale che avvia il programma e gestisce l'input dell'utente.
+- **Giocatore.java**: Gestisce i dati e le azioni del giocatore, inclusa la criptazione delle password.
+- **Circuito.java**: Rappresenta un circuito e gestisce la simulazione della gara.
+- **Pilota.java**: Rappresenta un pilota e gestisce la simulazione della sua corsa.
+- **Scrittore.java**: Gestisce il salvataggio dei dati su file.
+- **Cronometro.java**: Gestisce il tempo durante la gara.
+- **ScrittoreDatiPiloti.java**: Gestisce il salvataggio dei dati dei piloti su file.
+- **Lettore.java**: Gestisce la lettura dei file.
 
-    ```
-    java com.mycompany.grandprix.GrandPrix
-    ```
+## Requisiti di Sistema
 
-6. Segui le istruzioni visualizzate a schermo per partecipare alla simulazione del Grand Prix.
+- JDK (Java Development Kit) installato sul sistema.
 
+## Avvertenza
 
+Questo programma è stato sviluppato a scopo didattico e non dovrebbe essere utilizzato in ambienti di produzione senza una rigorosa revisione e adeguata sicurezza.
+
+---
+
+© 2024 - Esty
