@@ -16,14 +16,12 @@ import java.util.logging.Logger;
  */
 public class ScrittoreDatiPiloti implements Runnable {
 
-    String nomeFile;
-    String nome;
-    String modelloAuto;
+    private String nomeFile;
+    private Pilota[] piloti;
 
-    public ScrittoreDatiPiloti(String nomeFile, String nome, String modelloAuto) {
+    public ScrittoreDatiPiloti(String nomeFile, Pilota[] piloti) {
         this.nomeFile = nomeFile;
-        this.nome = nome;
-        this.modelloAuto = modelloAuto;
+        this.piloti = piloti;
     }
 
     @Override
@@ -31,21 +29,17 @@ public class ScrittoreDatiPiloti implements Runnable {
         scrivi();
     }
 
-    /**
-     * Scrive un file di testo usando la classe BufferedWriter
-     */
     public void scrivi() {
-
         try (BufferedWriter br = new BufferedWriter(new FileWriter(nomeFile))) {
-            br.write("<" + nome + ">");
-            br.write("\n\r");
-            br.write("<" + modelloAuto + ">");
-            br.write("\n\r");
+            for (Pilota pilota : piloti) {
+                br.write("<" + pilota.nome + ">");
+                br.write("\n\r");
+                br.write("<" + pilota.modelloAuto + ">");
+                br.write("\n\r");
+            }
             br.flush();
-
         } catch (IOException ex) {
             Logger.getLogger(Scrittore.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 }

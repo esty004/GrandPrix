@@ -16,6 +16,9 @@ public class Pilota extends Thread {
     int lunghezzaCircuito;
     int numeroPitStopPossibili;
     int scelta;
+    boolean running = true;
+    boolean completatoSenzaIncidenti = true;
+    long tempoTotale;
 
     public Pilota(String nome, String modelloAuto, String nomeCircuito, int ngiri, int lunghezzaCircuito, int numeroPitStopPossibili, int scelta) {
         this.nome = nome;
@@ -29,12 +32,13 @@ public class Pilota extends Thread {
 
     @Override
     public void run() {
-        Scanner scan = new Scanner(System.in);
         Random rand = new Random();
         int giriCompletati = 0;
         int posizione = 0;
+        Cronometro cronometro = new Cronometro();
+        cronometro.avvia();
 
-        while (giriCompletati < ngiri) {
+        while (giriCompletati < ngiri && running) {
             int distanzaPercorsa = 0;
             switch (scelta) {
                 case 1:
@@ -44,17 +48,9 @@ public class Pilota extends Thread {
 
                     pitStop(posizione);
 
-                    incidente(nome, rand);
+                    incidente(rand);
 
-                    safetyCar(rand);
-
-                    // Verifica se è stato completato un giro
-                    if (posizione >= lunghezzaCircuito) {
-                        System.out.println(nome + " ha completato il giro " + (giriCompletati + 1) + " su " + ngiri);
-                        posizione -= lunghezzaCircuito; // Resetta la posizione per il nuovo giro
-                        giriCompletati++;
-                    }
-
+                    giriCompletati = verificaGiro(posizione, lunghezzaCircuito, giriCompletati);
                     // Simulazione di avanzamento del tempo (1 secondo)
                     try {
                         Thread.sleep(1000);
@@ -69,16 +65,9 @@ public class Pilota extends Thread {
 
                     pitStop(posizione);
 
-                    incidente(nome, rand);
+                    incidente(rand);
 
-                    safetyCar(rand);
-
-                    // Verifica se è stato completato un giro
-                    if (posizione >= lunghezzaCircuito) {
-                        System.out.println(nome + " ha completato il giro " + (giriCompletati + 1) + " su " + ngiri);
-                        posizione -= lunghezzaCircuito; // Resetta la posizione per il nuovo giro
-                        giriCompletati++;
-                    }
+                    giriCompletati = verificaGiro(posizione, lunghezzaCircuito, giriCompletati);
 
                     // Simulazione di avanzamento del tempo (1 secondo)
                     try {
@@ -89,9 +78,9 @@ public class Pilota extends Thread {
                     break;
             }
         }
-
-        System.out.println(nome + " ha completato la gara.");
-
+        cronometro.ferma();
+        tempoTotale = cronometro.getTempoTotale();
+        System.out.println(nome + " ha completato la gara in: " + tempoTotale);
     }
 
     public void pitStop(int posizione) {
@@ -107,29 +96,45 @@ public class Pilota extends Thread {
         }
     }
 
-    public void incidente(String nome, Random rand) {
+    public void incidente(Random rand) {
         // Verifica se si è verificato un incidente
         if (rand.nextDouble() < 0.05) { // Probabilità del 5% di incidente
             System.out.println("Incidente! " + nome + " è costretto ad abbandonare la gara.");
-        }
-
-    }
-
-    public void safetyCar(Random rand) {
-        // Verifica se è necessario far intervenire la safety car
-        if (rand.nextDouble() < 0.02) { // Probabilità del 2% di intervento della safety car
-            System.out.println("Safety car in pista!");
-            try {
-                Thread.sleep(3000); // Simulazione del tempo di intervento della safety car (3 secondi)
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            completatoSenzaIncidenti = false;
+            if (rand.nextDouble() < 0.02) { // Probabilità del 2% di intervento della safety car
+                System.out.println("Safety car in pista, " + nome + " torna in gara");
+                running = true;
+                try {
+                    Thread.sleep(3000); // Simulazione del tempo di intervento della safety car (3 secondi)
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                running = false;
             }
+            
         }
     }
 
-    public void salvaDatiPiloti() {
-        ScrittoreDatiPiloti scrittore = new ScrittoreDatiPiloti("salvataggioPiloti.csv", nome, modelloAuto);
+    
+
+    public int verificaGiro(int posizione, int lunghezzaCircuito, int giriCompletati) {
+        // Verifica se è stato completato un giro
+        if (posizione >= lunghezzaCircuito) {
+            System.out.println(nome + " ha completato il giro " + (giriCompletati + 1) + " su " + ngiri);
+            posizione -= lunghezzaCircuito; // Resetta la posizione per il nuovo giro
+            giriCompletati++;
+        }
+        return giriCompletati;
+    }
+
+    public void salvaDatiPiloti(Pilota[] piloti) {
+        ScrittoreDatiPiloti scrittore = new ScrittoreDatiPiloti("salvataggioPiloti.csv", piloti);
         Thread threadScrittore = new Thread(scrittore);
         threadScrittore.start();
+    }
+
+    public long getTempoTotale() {
+        return tempoTotale;
     }
 }

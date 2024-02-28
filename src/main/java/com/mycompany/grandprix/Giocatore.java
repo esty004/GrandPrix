@@ -47,7 +47,7 @@ public class Giocatore {
         Thread threadScrittore = new Thread(scrittore);
         threadScrittore.start();
     }
-
+    //inserimento specifiche del circuito
     public void avviaGara() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Inserisci nome circuito:");
